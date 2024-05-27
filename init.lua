@@ -120,6 +120,13 @@ vim.opt.breakindent = true
 
 -- Save undo history
 vim.opt.undofile = true
+-- Set the undo directory
+vim.o.undodir = vim.fn.expand '~/.config/nvim/undos'
+
+-- Check if the undo directory exists and create it if it doesn't
+if vim.fn.isdirectory(vim.o.undodir) == 0 then
+  vim.fn.mkdir(vim.o.undodir, 'p')
+end
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
@@ -153,6 +160,9 @@ vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
+
+-- Disable swap file
+vim.o.swapfile = false
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -194,6 +204,14 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 vim.keymap.set('n', '<localleader><localleader>', '<C-^>', { desc = 'Alternate file' })
 vim.keymap.set('n', '<leader><leader>', '<esc>:w<CR>', { desc = 'Save file' })
 vim.keymap.set('n', '<leader>wd', ':call mkdir(expand("%:p:h"), "p")<CR>', { desc = 'Save file creating non-existing directories' })
+vim.keymap.set('n', '<leader>wv', ':vs <CR>', { desc = 'V split' })
+vim.keymap.set('n', '<leader>ww', '<C-w>w', { desc = 'Other window' })
+vim.keymap.set('n', '<leader>wr', '<C-w>r', { desc = 'Rotate windows' })
+vim.keymap.set('n', '<leader>wm', '<C-w>o', { desc = 'Maximise current window' })
+vim.keymap.set('n', '<leader>wq', ':wq <CR>', { desc = 'Save and quit' })
+vim.keymap.set('n', '<leader>qq', ':q! <CR>', { desc = 'Quit without saving' })
+vim.keymap.set('n', '<localleader>sn', ':echo @% <CR>', { desc = 'Show current file full path' })
+vim.keymap.set('n', '<localleader>rf', ':e! <CR>', { desc = 'Reload file' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -886,12 +904,12 @@ require('lazy').setup({
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
-  -- require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
-  -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
-  -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.indent_line',
+  require 'kickstart.plugins.lint',
+  require 'kickstart.plugins.autopairs',
+  require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
