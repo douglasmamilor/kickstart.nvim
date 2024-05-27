@@ -2,4 +2,13 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
-return {}
+return {
+  require('nightfox').setup {
+    palettes = {
+      -- Custom carbonfox with black background
+      carbonfox = {
+        bg1 = '#000000', -- Black background
+      },
+    },
+  },
+}

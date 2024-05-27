@@ -121,7 +121,7 @@ vim.opt.breakindent = true
 -- Save undo history
 vim.opt.undofile = true
 -- Set the undo directory
-vim.o.undodir = vim.fn.expand '~/.config/nvim/undos'
+vim.o.undodir = vim.fn.expand '~/undos/nvimk'
 
 -- Check if the undo directory exists and create it if it doesn't
 if vim.fn.isdirectory(vim.o.undodir) == 0 then
@@ -809,13 +809,14 @@ require('lazy').setup({
     -- change the command in the config to whatever the name of that colorscheme is.
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'folke/tokyonight.nvim',
+    -- 'folke/tokyonight.nvim',
+    'EdenEast/nightfox.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     init = function()
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+      vim.cmd.colorscheme 'carbonfox'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'

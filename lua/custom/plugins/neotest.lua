@@ -28,10 +28,19 @@ return {
             -- Path to your Vite configuration file
             vite_config_file = '/path/to/your/vite.config.ts',
           },
-          require 'neotest-go',
+          require 'neotest-go' {
+            -- Enable debug logging
+            log_level = 'debug',
+            -- Optionally set other configurations for neotest-go
+            experimental = {
+              test_table = true,
+            },
+            recursive_run = true,
+          },
           require 'neotest-zig',
         },
         log_level = vim.log.levels.DEBUG,
+        log_file = '~/.config/nvimk/lua/custom/plugins/neotest.log',
       }
       vim.api.nvim_set_keymap('n', '<leader>mr', ':lua require("neotest").run.run()<CR>', { noremap = true, silent = true })
       vim.api.nvim_set_keymap('n', '<leader>ms', ':lua require("neotest").run.stop()<CR>', { noremap = true, silent = true })
