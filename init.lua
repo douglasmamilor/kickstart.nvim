@@ -200,28 +200,9 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
--- my function to open alternate files. For things like tests etc
-function OpenAlternativeFile()
-  local current_file = vim.fn.expand '%:r'
-  local current_extension = vim.fn.expand '%:e'
-
-  if current_extension == 'h' then
-    vim.cmd('e ' .. current_file .. '.c')
-  elseif current_extension == 'c' then
-    vim.cmd('e ' .. current_file .. '.h')
-  elseif current_extension == 'go' then
-    vim.cmd 'GoAlternate!'
-  else
-    vim.cmd('e ' .. vim.fn.expand '%')
-  end
-end
-
--- Create a command to call the function
-vim.api.nvim_create_user_command('OpenAlternativeFile', OpenAlternativeFile, {})
-
--- Set the keymap
-vim.keymap.set('n', '<localleader>.', OpenAlternativeFile)
 -- Custom keymaps
+local alternative_file = require 'custom.utils.alternative_file'
+vim.api.nvim_set_keymap('n', '<localleader>.', ':lua require("custom.utils.alternative_file").OpenAlternativeFile()<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<localleader><localleader>', '<C-^>', { desc = 'Alternate file' })
 vim.keymap.set('n', '<leader><leader>', '<esc>:w<CR>', { desc = 'Save file' })
 vim.keymap.set('n', '<leader>wd', ':call mkdir(expand("%:p:h"), "p")<CR>', { desc = 'Save file creating non-existing directories' })
@@ -233,7 +214,6 @@ vim.keymap.set('n', '<leader>wq', ':wq <CR>', { desc = 'Save and quit' })
 vim.keymap.set('n', '<leader>qq', ':q! <CR>', { desc = 'Quit without saving' })
 vim.keymap.set('n', '<localleader>sn', ':echo @% <CR>', { desc = 'Show current file full path' })
 vim.keymap.set('n', '<localleader>rf', ':e! <CR>', { desc = 'Reload file' })
-vim.keymap.set('n', '<localleader>.', OpenAlternativeFile)
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
