@@ -1,3 +1,4 @@
+-- treesitter.lua
 return {
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
@@ -26,9 +27,13 @@ return {
         'gowork',
         'gosum',
       },
+      -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
         enable = true,
+        -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
+        --  If you are experiencing weird indenting issues, add the language to
+        --  the list of additional_vim_regex_highlighting and disabled languages for indent.
         additional_vim_regex_highlighting = { 'ruby' },
       },
       indent = { enable = true, disable = { 'ruby' } },
@@ -73,49 +78,6 @@ return {
           },
         },
       },
-      refactor = {
-        highlight_definitions = { enable = true },
-        highlight_current_scope = { enable = false },
-        smart_rename = {
-          enable = true,
-          keymaps = {
-            smart_rename = 'grr',
-          },
-        },
-        navigation = {
-          enable = true,
-          keymaps = {
-            goto_definition = 'gnd',
-            list_definitions = 'gnD',
-            list_definitions_toc = 'gO',
-            goto_next_usage = '<a-*>',
-            goto_previous_usage = '<a-#>',
-          },
-        },
-      },
-      rainbow = {
-        enable = true,
-        extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-        max_file_lines = nil, -- Do not enable for files with more than n lines, int
-      },
-      playground = {
-        enable = true,
-        disable = {},
-        updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-        persist_queries = false, -- Whether the query persists across vim sessions
-        keybindings = {
-          toggle_query_editor = 'o',
-          toggle_hl_groups = 'i',
-          toggle_injected_languages = 't',
-          toggle_anonymous_nodes = 'a',
-          toggle_language_display = 'I',
-          focus_language = 'f',
-          unfocus_language = 'F',
-          update = 'R',
-          goto_node = '<cr>',
-          show_help = '?',
-        },
-      },
     },
     config = function(_, opts)
       -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
@@ -136,26 +98,6 @@ return {
         mode = 'cursor', -- Line used to calculate context. Choices: 'cursor', 'topline'
         separator = nil, -- Separator between context and content. Should be a single character string, like '-'.
         zindex = 20, -- The Z-index of the context window
-      }
-
-      -- LSP configuration for Go (gopls)
-      require'lspconfig'.gopls.setup{
-        on_attach = function(client, bufnr)
-          -- Enable completion triggered by <c-x><c-o>
-          vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-          -- Configure keybindings and other LSP settings here
-        end,
-        settings = {
-          gopls = {
-            usePlaceholders = true,
-            completeUnimported = true,
-            staticcheck = true,
-          },
-        },
-        -- Ensure the gopls uses the go.work file in the current directory
-        root_dir = function(fname)
-          return require'lspconfig'.util.root_pattern('go.work', 'go.mod', '.git')(fname) or vim.fn.getcwd()
-        end,
       }
     end,
   },
