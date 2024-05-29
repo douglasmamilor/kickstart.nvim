@@ -217,6 +217,7 @@ vim.keymap.set('n', '<leader>wr', '<C-w>r', { desc = 'Rotate windows' })
 vim.keymap.set('n', '<leader>wm', '<C-w>o', { desc = 'Maximise current window' })
 vim.keymap.set('n', '<leader>wq', ':wq <CR>', { desc = 'Save and quit' })
 vim.keymap.set('n', '<leader>qq', ':q! <CR>', { desc = 'Quit without saving' })
+vim.keymap.set('n', 'Q', ':q <CR>', { desc = 'Quit' })
 vim.keymap.set('n', '<localleader>sn', ':echo @% <CR>', { desc = 'Show current file full path' })
 vim.keymap.set('n', '<localleader>rf', ':e! <CR>', { desc = 'Reload file' })
 vim.api.nvim_set_keymap(
@@ -231,7 +232,24 @@ vim.keymap.set('n', '<D-f>', '<esc>:Telescope live_grep search_dirs=.<CR>', { no
 
 local ctop = require('custom.utils.ctop').run_ctop
 vim.api.nvim_create_user_command('Ctop', ctop, {})
-vim.api.nvim_set_keymap('n', '<localleader>ct', ':Ctop<CR>', { desc = 'Open Ctop', noremap = true, silent = true })
+vim.keymap.set('n', '<localleader>ct', ':Ctop<CR>', { desc = 'Open Ctop', noremap = true, silent = true })
+
+vim.keymap.set('n', 'gV', '`[V`]', { desc = 'Highlight entire buffer', noremap = true, silent = true })
+vim.keymap.set('n', 'Y', 'y$', { desc = 'Yank to end of line', noremap = true, silent = true })
+
+vim.keymap.set(
+  'n',
+  '<localleader>wd',
+  ':lua require("custom.utils.write_with_dirs").create_dirs_and_write()<CR>',
+  { desc = 'Write file with new dirs', noremap = true, silent = true }
+)
+
+vim.api.nvim_set_keymap(
+  'n',
+  '<localleader>w!',
+  ':lua require("custom.utils.sudo_write").sudo_write()<CR>',
+  { desc = 'Sudo write', noremap = true, silent = true }
+)
 
 local treesitter_context_included_filetypes = { 'rust', 'zig', 'go', 'typescript', 'javascript', 'c', 'cpp' }
 vim.api.nvim_create_autocmd('FileType', {
