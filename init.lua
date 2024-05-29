@@ -227,17 +227,21 @@ vim.api.nvim_set_keymap(
 )
 vim.keymap.set('n', '<localleader>fd', ':call delete(expand(" % ")) <CR>', { desc = 'Delete file' })
 vim.keymap.set('n', '<localleader>o', ':silent !open .<CR>', { desc = 'Open in Finder' })
+vim.keymap.set('n', '<D-f>', '<esc>:Telescope live_grep search_dirs=.<CR>', { noremap = true, silent = true, desc = 'Live Grep in current directory' })
 
--- Define the list of file types to include
+local ctop = require('custom.utils.ctop').run_ctop
+vim.api.nvim_create_user_command('Ctop', ctop, {})
+vim.api.nvim_set_keymap('n', '<localleader>ct', ':Ctop<CR>', { desc = 'Open Ctop', noremap = true, silent = true })
+
 local treesitter_context_included_filetypes = { 'rust', 'zig', 'go', 'typescript', 'javascript', 'c', 'cpp' }
-
--- Create an autocmd to enable treesitter-context for included file types
 vim.api.nvim_create_autocmd('FileType', {
   pattern = treesitter_context_included_filetypes,
   callback = function()
     require('treesitter-context').enable()
   end,
 })
+
+-- /Custom keymaps
 
 -- vim.keymap.set('n', '<localleader>n', ':e %%', { desc = 'Create new file' })
 
@@ -880,7 +884,6 @@ require('lazy').setup({
       require('mini.jump').setup()
       require('mini.bufremove').setup()
       require('mini.operators').setup()
-      require('mini.pick').setup()
       require('mini.sessions').setup()
       require('mini.splitjoin').setup()
       require('mini.starter').setup()
