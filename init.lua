@@ -201,9 +201,14 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Custom keymaps
-local alternative_file = require 'custom.utils.alternative_file'
-vim.api.nvim_set_keymap('n', '<localleader>.', ':lua require("custom.utils.alternative_file").OpenAlternativeFile()<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<localleader><localleader>', '<C-^>', { desc = 'Alternate file' })
+vim.api.nvim_set_keymap(
+  'n',
+  '<localleader>.',
+  ':lua require("custom.utils.alternative_file").OpenAlternativeFile()<CR>',
+  { desc = 'Open Alternative File', noremap = true, silent = true }
+)
+vim.api.nvim_set_keymap('n', '<localleader>n', ':lua require("custom.utils.rename_file").rename_file()<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<localleader><localleader>', '<C-^>', { desc = 'Toggle Prev File' })
 vim.keymap.set('n', '<leader><leader>', '<esc>:w<CR>', { desc = 'Save file' })
 vim.keymap.set('n', '<leader>wd', ':call mkdir(expand("%:p:h"), "p")<CR>', { desc = 'Save file creating non-existing directories' })
 vim.keymap.set('n', '<leader>wv', ':vs <CR>', { desc = 'V split' })
@@ -214,6 +219,16 @@ vim.keymap.set('n', '<leader>wq', ':wq <CR>', { desc = 'Save and quit' })
 vim.keymap.set('n', '<leader>qq', ':q! <CR>', { desc = 'Quit without saving' })
 vim.keymap.set('n', '<localleader>sn', ':echo @% <CR>', { desc = 'Show current file full path' })
 vim.keymap.set('n', '<localleader>rf', ':e! <CR>', { desc = 'Reload file' })
+vim.api.nvim_set_keymap(
+  'n',
+  '<localleader>e',
+  ':lua require("custom.utils.create_file").create_file()<CR>',
+  { desc = 'New file in pwd', noremap = true, silent = true }
+)
+vim.keymap.set('n', '<localleader>fd', ':call delete(expand(" % ")) <CR>', { desc = 'Delete file' })
+vim.keymap.set('n', '<localleader>o', ':silent !open .<CR>', { desc = 'Open in Finder' })
+
+-- vim.keymap.set('n', '<localleader>n', ':e %%', { desc = 'Create new file' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -847,6 +862,17 @@ require('lazy').setup({
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
+      require('mini.align').setup()
+      require('mini.bracketed').setup()
+      require('mini.cursorword').setup()
+      require('mini.jump').setup()
+      require('mini.bufremove').setup()
+      require('mini.operators').setup()
+      require('mini.pick').setup()
+      require('mini.sessions').setup()
+      require('mini.splitjoin').setup()
+      require('mini.starter').setup()
+      require('mini.trailspace').setup()
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
