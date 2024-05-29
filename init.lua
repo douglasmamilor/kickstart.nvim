@@ -228,6 +228,17 @@ vim.api.nvim_set_keymap(
 vim.keymap.set('n', '<localleader>fd', ':call delete(expand(" % ")) <CR>', { desc = 'Delete file' })
 vim.keymap.set('n', '<localleader>o', ':silent !open .<CR>', { desc = 'Open in Finder' })
 
+-- Define the list of file types to include
+local treesitter_context_included_filetypes = { 'rust', 'zig', 'go', 'typescript', 'javascript', 'c', 'cpp' }
+
+-- Create an autocmd to enable treesitter-context for included file types
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = treesitter_context_included_filetypes,
+  callback = function()
+    require('treesitter-context').enable()
+  end,
+})
+
 -- vim.keymap.set('n', '<localleader>n', ':e %%', { desc = 'Create new file' })
 
 -- [[ Basic Autocommands ]]
@@ -278,7 +289,6 @@ require('lazy').setup({
   --    require('Comment').setup({})
 
   'fatih/vim-go',
-
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
   -- Here is a more advanced example where we pass configuration
