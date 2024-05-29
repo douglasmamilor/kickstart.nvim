@@ -277,6 +277,8 @@ require('lazy').setup({
   --  This is equivalent to:
   --    require('Comment').setup({})
 
+  'fatih/vim-go',
+
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
   -- Here is a more advanced example where we pass configuration
