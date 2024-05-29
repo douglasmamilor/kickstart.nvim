@@ -251,6 +251,8 @@ vim.api.nvim_set_keymap(
   { desc = 'Sudo write', noremap = true, silent = true }
 )
 
+vim.api.nvim_set_keymap('x', '@', ':<C-u>lua require("custom.utils.execute_macro").execute_macro_over_visual_range()<CR>', { noremap = true, silent = true })
+
 local treesitter_context_included_filetypes = { 'rust', 'zig', 'go', 'typescript', 'javascript', 'c', 'cpp' }
 vim.api.nvim_create_autocmd('FileType', {
   pattern = treesitter_context_included_filetypes,
