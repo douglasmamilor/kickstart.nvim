@@ -200,7 +200,7 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
--- Custom keymaps
+-- Doug Custom
 vim.api.nvim_set_keymap(
   'n',
   '<localleader>.',
@@ -261,7 +261,9 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
--- /Custom keymaps
+require 'custom.utils.shell_exec'
+
+-- /Doug Custom
 
 -- vim.keymap.set('n', '<localleader>n', ':e %%', { desc = 'Create new file' })
 
