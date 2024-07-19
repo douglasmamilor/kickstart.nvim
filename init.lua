@@ -234,6 +234,10 @@ local ctop = require('custom.utils.ctop').run_ctop
 vim.api.nvim_create_user_command('Ctop', ctop, {})
 vim.keymap.set('n', '<localleader>ct', ':Ctop<CR>', { desc = 'Open Ctop', noremap = true, silent = true })
 
+local lazydocker = require('custom.utils.lazydocker').run_lazydocker
+vim.api.nvim_create_user_command('LazyDocker', lazydocker, {})
+vim.keymap.set('n', '<localleader>do', ':LazyDocker<CR>', { desc = 'Open LazyDocker', noremap = true, silent = true })
+
 vim.keymap.set('n', 'gV', '`[V`]', { desc = 'Highlight entire buffer', noremap = true, silent = true })
 vim.keymap.set('n', 'Y', 'y$', { desc = 'Yank to end of line', noremap = true, silent = true })
 
@@ -253,7 +257,7 @@ vim.api.nvim_set_keymap(
 
 vim.api.nvim_set_keymap('x', '@', ':<C-u>lua require("custom.utils.execute_macro").execute_macro_over_visual_range()<CR>', { noremap = true, silent = true })
 
-local treesitter_context_included_filetypes = { 'rust', 'zig', 'go', 'typescript', 'javascript', 'c', 'cpp' }
+local treesitter_context_included_filetypes = { '*.rust', '*.zig', '*.go', '*.typescript', '*.javascript', '*.c', '*.cpp' }
 vim.api.nvim_create_autocmd('FileType', {
   pattern = treesitter_context_included_filetypes,
   callback = function()
@@ -718,13 +722,6 @@ require('lazy').setup({
         },
       }
     end,
-    opts = {
-      setup = {
-        rust_analyzer = function()
-          return true
-        end,
-      },
-    },
   },
 
   { -- Autoformat
@@ -732,7 +729,7 @@ require('lazy').setup({
     lazy = false,
     keys = {
       {
-        '<leader>f',
+        '<localleader><localleader>',
         function()
           require('conform').format { async = true, lsp_fallback = true }
         end,
