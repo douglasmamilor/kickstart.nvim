@@ -749,7 +749,7 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         rust = { 'rustfmt' },
-        go = { 'goimports' },
+        go = { 'gopls' },
         c = { 'clang-format' },
         cpp = { 'clang-format' },
         javascript = { { 'prettierd', 'prettier' } },
@@ -876,55 +876,55 @@ require('lazy').setup({
   },
 
   -- Set theme to nightfox
-  -- { -- You can easily change to a different colorscheme.
-  --   -- Change the name of the colorscheme plugin below, and then
-  --   -- change the command in the config to whatever the name of that colorscheme is.
-  --   --
-  --   -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-  --   'EdenEast/nightfox.nvim',
-  --   priority = 1000, -- Make sure to load this before all the other start plugins.
-  --   config = function()
-  --     require('nightfox').setup {
-  --       palettes = {
-  --         -- Custom carbonfox with black background
-  --         carbonfox = {
-  --           bg1 = '#000000', -- Black background
-  --         },
-  --       },
-  --     }
-  --     -- Set the colorscheme to carbonfox
-  --     vim.cmd.colorscheme 'carbonfox'
-  --   end,
-  --   init = function()
-  --     -- Load the colorscheme here.
-  --     -- Like many other themes, this one has different styles, and you could load
-  --     -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-  --     vim.cmd.colorscheme 'carbonfox'
-  --
-  --     -- You can configure highlights by doing something like:
-  --     vim.cmd.hi 'Comment gui=none'
-  --   end,
-  -- },
-
-  -- Or set theme to tokyonight
-  {
-    'folke/tokyonight.nvim',
+  { -- You can easily change to a different colorscheme.
+    -- Change the name of the colorscheme plugin below, and then
+    -- change the command in the config to whatever the name of that colorscheme is.
+    --
+    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
+    'EdenEast/nightfox.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
-      require('tokyonight').setup {
-        style = 'night', -- Ensure you're using the 'night' style of tokyonight
-        styles = {
-          sidebars = 'transparent',
-          floats = 'transparent',
+      require('nightfox').setup {
+        palettes = {
+          -- Custom carbonfox with black background
+          carbonfox = {
+            bg1 = '#000000', -- Black background
+          },
         },
-        on_colors = function(colors)
-          colors.bg = '#000000' -- Set the background to black
-        end,
       }
-      -- Set the colorscheme to tokyonight
-      vim.cmd.colorscheme 'tokyonight'
+      -- Set the colorscheme to carbonfox
+      vim.cmd.colorscheme 'carbonfox'
+    end,
+    init = function()
+      -- Load the colorscheme here.
+      -- Like many other themes, this one has different styles, and you could load
+      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
+      vim.cmd.colorscheme 'carbonfox'
+
+      -- You can configure highlights by doing something like:
+      vim.cmd.hi 'Comment gui=none'
     end,
   },
+
+  -- Or set theme to tokyonight
+  -- {
+  --   'folke/tokyonight.nvim',
+  --   priority = 1000, -- Make sure to load this before all the other start plugins.
+  --   config = function()
+  --     require('tokyonight').setup {
+  --       style = 'night', -- Ensure you're using the 'night' style of tokyonight
+  --       styles = {
+  --         sidebars = 'transparent',
+  --         floats = 'transparent',
+  --       },
+  --       on_colors = function(colors)
+  --         colors.bg = '#000000' -- Set the background to black
+  --       end,
+  --     }
+  --     -- Set the colorscheme to tokyonight
+  --     vim.cmd.colorscheme 'tokyonight'
+  --   end,
+  -- },
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
