@@ -764,7 +764,7 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         rust = { 'rustfmt' },
-        go = { 'gopls' },
+        go = { 'gopls', 'goimports' },
         c = { 'clang-format' },
         cpp = { 'clang-format' },
         javascript = { { 'prettierd', 'prettier' } },
