@@ -226,7 +226,9 @@ vim.api.nvim_set_keymap(
   ':lua require("custom.utils.create_file").create_file()<CR>',
   { desc = 'New file in pwd', noremap = true, silent = true }
 )
-vim.keymap.set('n', '<localleader>fd', ':call delete(expand(" % ")) <CR>', { desc = 'Delete file' })
+-- vim.keymap.set('n', '<localleader>fd', ':call delete(expand(" % ")) <CR>', { desc = 'Delete file' })
+vim.keymap.set('n', '<localleader>fd', ':!rm %', { desc = 'Delete file' })
+
 vim.keymap.set('n', '<localleader>o', ':silent !open .<CR>', { desc = 'Open in Finder' })
 vim.keymap.set('n', '<D-f>', '<esc>:Telescope live_grep search_dirs=.<CR>', { noremap = true, silent = true, desc = 'Live Grep in current directory' })
 
