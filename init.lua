@@ -268,11 +268,11 @@ vim.api.nvim_create_autocmd('FileType', {
 require 'custom.utils.shell_exec'
 
 -- TODO comments custom config
-vim.keymap.set('n', ']t', function()
+vim.keymap.set('n', '<leader>xt', function()
   require('todo-comments').jump_next()
 end, { desc = 'Next todo comment' })
 
-vim.keymap.set('n', '[t', function()
+vim.keymap.set('n', '<leader>xp', function()
   require('todo-comments').jump_prev()
 end, { desc = 'Previous todo comment' })
 
