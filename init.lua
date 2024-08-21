@@ -283,6 +283,10 @@ end, { desc = 'Previous todo comment' })
 --   require('todo-comments').jump_next { keywords = { 'ERROR', 'WARNING' } }
 -- end, { desc = 'Next error/warning todo comment' })
 
+-- Focus. Disable it and then set a keymap for it
+vim.g.focus_disable = true
+vim.api.nvim_set_keymap('n', '<leader>tg', ':FocusToggle<CR>', { noremap = true, silent = true })
+
 -- /Doug Custom
 
 -- vim.keymap.set('n', '<localleader>n', ':e %%', { desc = 'Create new file' })
