@@ -242,6 +242,8 @@ vim.keymap.set('n', '<localleader>do', ':LazyDocker<CR>', { desc = 'Open LazyDoc
 
 vim.keymap.set('n', 'gV', '`[V`]', { desc = 'Highlight entire buffer', noremap = true, silent = true })
 vim.keymap.set('n', 'Y', 'y$', { desc = 'Yank to end of line', noremap = true, silent = true })
+vim.keymap.set('n', 'j', 'gj', { desc = 'Navigate logical lines correctly', noremap = true, silent = true })
+vim.keymap.set('n', 'k', 'gk', { desc = 'Navigate logical lines correctly', noremap = true, silent = true })
 
 vim.keymap.set(
   'n',
