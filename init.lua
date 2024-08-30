@@ -330,7 +330,7 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
-  -- folke/noice (uses nvim prerelease)
+  -- folke/noice (uses prerelease nvim)
   {
     'folke/noice.nvim',
     event = 'VeryLazy',
