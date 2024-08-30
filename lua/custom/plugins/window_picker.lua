@@ -86,12 +86,20 @@ return {
         },
       }
 
-      -- Define <localleader>wW to pick a window
+      -- Define <leader>wW to jump to a window
       vim.api.nvim_set_keymap(
         'n',
         '<leader>wW',
         [[:lua local picked_window_id = require'window-picker'.pick_window(); if picked_window_id then vim.api.nvim_set_current_win(picked_window_id) end<CR>]],
-        { noremap = true, silent = true }
+        { desc = 'Jump to window', noremap = true, silent = true }
+      )
+
+      -- Define <leader>wd to delete a window
+      vim.api.nvim_set_keymap(
+        'n',
+        '<leader>wd',
+        [[:lua local picked_window_id = require'window-picker'.pick_window(); if picked_window_id then vim.api.nvim_win_close(picked_window_id, true) end<CR>]],
+        { desc = 'Delete a window', noremap = true, silent = true }
       )
     end,
   },
