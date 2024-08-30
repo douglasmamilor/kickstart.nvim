@@ -89,7 +89,7 @@ return {
       -- Define <localleader>wW to pick a window
       vim.api.nvim_set_keymap(
         'n',
-        '<localleader>wW',
+        '<leader>wW',
         [[:lua local picked_window_id = require'window-picker'.pick_window(); if picked_window_id then vim.api.nvim_set_current_win(picked_window_id) end<CR>]],
         { noremap = true, silent = true }
       )
